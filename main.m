@@ -6,18 +6,17 @@ clc ; clear all; close all;
 %% ============================== %%
 %IN variables (modify for different results
 
-%Eye size
+%Eye size (default 2)
 sizeEye = 2;
-%Saturation level (default 0.6)
-satLevel = 0.6;
-
+%Saturation level (default 0.5)
+satLevel = 0.8;
 
 
 %% ============================== %%
 %Reading data and setup variables
 
 %read image file
-I = imread('./images/ojo3.jpg');
+I = imread('./images/approved/ojo6.jpg');
 Ih = rgb2hsv(I);
 
 %Mask variable for preallocation
@@ -38,7 +37,7 @@ end
 
     
 %% ========================================= %%
-% Mask fixing
+% Mask fixing - Deleting small points
 
 %Define disk filter
 se = strel('disk',sizeEye);
@@ -51,7 +50,7 @@ maskFixed = imdilate(maskFiltered,se);
 
 
 %% ========================================= %%
-% Deleting false positives
+% Mask fixing - Filtering eyes region
 
 %There are possible false positives on the image, this code will clean it
 
